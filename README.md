@@ -10,7 +10,7 @@
 ```sh
 $ pip3 install Django==3.1.4
 ```
-3. Download the GitHup repository 
+3. Download the GitHup repository (as a ZIP file)
 4. Navigate in the project folder
 5. Run the app
 
