@@ -2,6 +2,11 @@
 
 ## Blockchain-E-Voting-System
 
+### Requirements 
+
+1. Python3
+2. Django 3.1.4
+
 ### Installation and Execution
 
 1. Download and install Python (https://www.python.org/downloads/)
