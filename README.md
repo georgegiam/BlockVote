@@ -18,5 +18,5 @@ $ pip3 install Django==3.1.4
 $ python3 manage.py runserver
 ```
 
-6. copy the given IP
+6. Copy the given IP
 7. Paste it on your browser
