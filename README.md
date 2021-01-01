@@ -1,6 +1,8 @@
 # BlockVote
 
-## Blockchain-E-Voting-System
+### About
+
+BlockVote is a blockchain based e-voting system. The main purpose of this system is to ensure the integrity of the voting process by using blockchain technology.
 
 ### Requirements 
 
