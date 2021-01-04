@@ -1,0 +1,55 @@
+{% extends "voting/main.html" %}
+
+{% block title %}
+BlockVote
+{% endblock %}
+
+{% block body %}
+<div class="container text-center" id="main">
+    <h1>Voting Center</h1><br>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>#45</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>#87</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>Bird</td>
+                <td>#55</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <small>Select the candidate you want to vote. First enter your "user id" and then the "candidate id" you want to
+        vote for.
+        Note that you can vote only once and you are unable to modify your vote.</small><br><br>
+    <form>
+        <div class="form-group">
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="User ID">
+        </div><br>
+        <div class="form-group">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Candidate ID">
+        </div><br>
+        <button type="submit" class="btn btn-primary">Submit Vote</button>
+    </form>
+</div>
+{% endblock %}
