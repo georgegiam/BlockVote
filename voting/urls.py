@@ -3,9 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),    
-    path('vote', views.votingNow, name="vote"),
+    path('cast_vote', views.votingNow, name="vote"),
+    path('check_vote', views.checkingNow, name="check"),
     
-    path('api/vote', views.cast_vote, name="cast_vote"),
-    path('api/check', views.check_vote, name="check_vote"),
+    path('cast_vote/api/vote', views.cast_vote, name="cast_vote"),
+    path('check_vote/api/check', views.check_vote, name="check_vote"),
     
 ]
