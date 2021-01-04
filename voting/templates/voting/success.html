@@ -1,0 +1,20 @@
+{% extends "voting/main.html" %}
+{% load static %}
+
+{% block title %}
+BlockVote
+{% endblock %}
+
+{% block body %}
+<div class="container text-center" id="main">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Hooray!</h4>
+        <p>Your vote has been successfully submited.</p>
+        <hr>
+        <p class="mb-0">You can now check your vote, but you cannot modify it or vote again.</p>
+      </div>
+
+    <a class="btn btn-secondary" href="{% url 'check' %}" role="button">Check Vote</a>
+    <a class="btn btn-primary" href="{% url 'index' %}" role="button">Return Home</a>
+</div>
+{% endblock %}
