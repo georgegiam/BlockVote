@@ -46,7 +46,7 @@ BlockVote
         Note that you can vote only once and you are unable to modify your vote.</small><br><br>
 
     <!-- voting form -->
-    <form method="POST" action="/api/vote">
+    <form method="POST" action="cast_vote/api/vote">
         {% csrf_token %}
         <div class="form-group">
             <input type="text" class="form-control" name="voter_id" placeholder="User ID">

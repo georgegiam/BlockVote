@@ -8,7 +8,7 @@ BlockVote
 <div class="container text-center" id="main">
     <h1>Check your vote</h1>    
 
-        <form class="form-inline" action="/api/check" method="POST">
+        <form class="form-inline" action="cast_vote/api/check" method="POST">
             {% csrf_token %}
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="voter_id" placeholder="User ID">
