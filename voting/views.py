@@ -31,27 +31,29 @@ def cast_vote(request):
         voter_id = request.POST.get('voter_id', '')
         candidate_id = request.POST.get('candidate_id', '')
     
-    pattern_voter_id = '\d{1,9}'
-    pattern_candidate_id = '[1-9]'
-    
-    result_voter = re.match(pattern_voter_id, voter_id)
-    result_candidate = re.match(pattern_candidate_id, candidate_id)
+        pattern_voter_id = '\d{1,9}'
+        pattern_candidate_id = '[1-9]'
 
-    if result_voter and result_candidate:
-        if voter_id not in voter_id_set:
-            
-            voter_id_set.add(voter_id)
-            
-            c.add_block('{},{}'.format(voter_id,candidate_id))
-            print("voting successful.")
-            
-            return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
+        result_voter = re.match(pattern_voter_id, voter_id)
+        result_candidate = re.match(pattern_candidate_id, candidate_id)
+
+        if result_voter and result_candidate:
+            if voter_id not in voter_id_set:
+
+                voter_id_set.add(voter_id)
+
+                c.add_block('{},{}'.format(voter_id,candidate_id))
+                print("voting successful.")
+
+                return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
+            else:
+                print("voting unsuccessful.")
+                return JsonResponse({'error': 'already voted once!'}, status=422)
         else:
             print("voting unsuccessful.")
-            return JsonResponse({'error': 'already voted once!'}, status=422)
+            return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
     else:
-        print("voting unsuccessful.")
-        return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
+        return render(request, 'voting/vote.html')
 
 @method_decorator(csrf_exempt, name='dispatch')
 def check_vote(request):
