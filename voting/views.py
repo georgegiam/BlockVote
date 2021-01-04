@@ -76,7 +76,11 @@ def check_vote(request):
                     block_candidate = ''
                     print(data)
                 if block_voter_id == voter_id:
-                    return JsonResponse({'candidate_id': block_candidate})
+                    args = {}
+                    args['cand'] = block_candidate
+                    args['voter'] = voter_id
+                    # return JsonResponse({'candidate_id': block_candidate})
+                    return render(request, 'voting/my_vote.html', args)
 
         # return JsonResponse({'error': 'vote not found!'}, status=404)
         return render(request, 'voting/error_user.html')
