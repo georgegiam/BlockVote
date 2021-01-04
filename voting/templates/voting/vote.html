@@ -49,10 +49,10 @@ BlockVote
     <form action="#" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <input type="text" class="form-control" id="voter_id" placeholder="User ID">
+            <input type="text" class="form-control" name="voter_id" placeholder="User ID">
         </div><br>
         <div class="form-group">
-            <input type="text" class="form-control" id="candidate_id" placeholder="Candidate ID">
+            <input type="text" class="form-control" name="candidate_id" placeholder="Candidate ID">
         </div><br>
         <button type="submit" class="btn btn-primary">Submit Vote</button>
     </form>
