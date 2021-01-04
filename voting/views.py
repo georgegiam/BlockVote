@@ -79,3 +79,35 @@ def check_vote(request):
         return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
 
 
+def count_votes():
+    count_candidate = {
+        '1': 0,
+        '2': 0,
+        '3': 0,
+        '4': 0,
+        '5': 0,
+        '6': 0,
+        '7': 0,
+        '8': 0,
+        '9': 0,
+    }
+    for block in c.blocks[1:]:
+        data = block.data.split(',')
+        candidate_id = data[1].strip()
+        count_candidate[candidate_id] += 1
+
+    winner_id = max(count_candidate, key=count_candidate.get)
+    return JsonResponse({'Winner': winner_id})
+
+
+def print_block(block):
+    print('Block    #', block.index)
+    print('          ', block.data)
+    print('Timestamp ', block.timestamp)
+    print('\n------------\n')
+
+
+def display_chain():
+    for block in c.blocks[1:]:
+        print_block(block)
+
