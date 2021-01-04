@@ -26,34 +26,31 @@ def some_view(request):
 #main api call to cast vote
 @method_decorator(csrf_exempt, name='dispatch')
 def cast_vote(request):
-    
-    if request.method == 'POST':        
-        voter_id = request.POST.get('voter_id', '')
-        candidate_id = request.POST.get('candidate_id', '')
-    
-        pattern_voter_id = '\d{1,9}'
-        pattern_candidate_id = '[1-9]'
+         
+    voter_id = request.POST.get('voter_id', '')
+    candidate_id = request.POST.get('candidate_id', '')
 
-        result_voter = re.match(pattern_voter_id, voter_id)
-        result_candidate = re.match(pattern_candidate_id, candidate_id)
+    pattern_voter_id = '\d{1,9}'
+    pattern_candidate_id = '[1-9]'
 
-        if result_voter and result_candidate:
-            if voter_id not in voter_id_set:
+    result_voter = re.match(pattern_voter_id, voter_id)
+    result_candidate = re.match(pattern_candidate_id, candidate_id)
 
-                voter_id_set.add(voter_id)
+    if result_voter and result_candidate:
+        if voter_id not in voter_id_set:
 
-                c.add_block('{},{}'.format(voter_id,candidate_id))
-                print("voting successful.")
+            voter_id_set.add(voter_id)
 
-                return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
-            else:
-                print("voting unsuccessful.")
-                return JsonResponse({'error': 'already voted once!'}, status=422)
+            c.add_block('{},{}'.format(voter_id,candidate_id))
+            print("voting successful.")
+
+            return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
         else:
             print("voting unsuccessful.")
-            return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
+            return JsonResponse({'error': 'already voted once!'}, status=422)
     else:
-        return render(request, 'voting/vote.html')
+        print("voting unsuccessful.")
+        return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
 
 @method_decorator(csrf_exempt, name='dispatch')
 def check_vote(request):
@@ -78,7 +75,7 @@ def check_vote(request):
                 if block_voter_id == voter_id:
                     return JsonResponse({'candidate_id': block_candidate})
 
-        return JsonResponse({'error': 'vote not found!'})
+        return JsonResponse({'error': 'vote not found!'}, status=404)
         
         
     else:
