@@ -1,4 +1,5 @@
 {% extends "voting/main.html" %}
+{% load static %}
 
 {% block title %}
 BlockVote
@@ -6,11 +7,15 @@ BlockVote
 
 {% block body %}
 <div class="container text-center" id="main">
+    <img src="{% static 'voting/images/logo.png' %}" alt="My image" width="30%">
+
     <h1>Welcome to <b style="color: orange;">BlockVote</b></h1>
+    
     <p>BlockVote is one of the most secure platforms for e-voting. 
         Based on the blockchain technology BlockVote ensures integrity and anonimization.
         Use your personal "usr id" and start voting anonimously and securly.</p>
 
-        <a class="btn btn-primary" href="{% url 'check' %}" role="button">Check Vote</a>
+        <a class="btn btn-secondary" href="{% url 'check' %}" role="button">Check Vote</a>
+        <a class="btn btn-primary" href="{% url 'vote' %}" role="button">Start Voting</a>
 </div>
 {% endblock %}
