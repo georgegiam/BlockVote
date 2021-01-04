@@ -15,6 +15,10 @@ c = bvs.MinimalChain()
 def index(request):
     return render(request, 'voting/index.html')
 
+# voting
+def votingNow(request):
+    return render(request, 'voting/vote.html')
+
 #test view
 def some_view(request):
     return JsonResponse({'world': 'earth', 'status': 'hello'})
