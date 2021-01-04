@@ -1,0 +1,22 @@
+{% extends "voting/main.html" %}
+
+{% block title %}
+BlockVote
+{% endblock %}
+
+{% block body %}
+<div class="container text-center" id="main">
+    <h1>Check your vote</h1>    
+
+        <form class="form-inline" action="#" method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="voter_id" placeholder="User ID">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Check Vote</button>
+                </div>                
+            </div>
+            <small><i>Check your vote by providing your user id.</i></small>
+        </form>
+</div>
+{% endblock %}
