@@ -19,9 +19,9 @@ def index(request):
 def votingNow(request):
     return render(request, 'voting/vote.html')
 
-#test view
-def some_view(request):
-    return JsonResponse({'world': 'earth', 'status': 'hello'})
+#checking
+def checkingNow(request):
+    return render(request, 'voting/check.html')
 
 #main api call to cast vote
 @method_decorator(csrf_exempt, name='dispatch')
