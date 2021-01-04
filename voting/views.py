@@ -27,8 +27,9 @@ def some_view(request):
 @method_decorator(csrf_exempt, name='dispatch')
 def cast_vote(request):
     
-    voter_id = request.POST.get('voter_id', '')
-    candidate_id = request.POST.get('candidate_id', '')
+    if request.method == 'POST':        
+        voter_id = request.POST.get('voter_id', '')
+        candidate_id = request.POST.get('candidate_id', '')
     
     pattern_voter_id = '\d{1,9}'
     pattern_candidate_id = '[1-9]'
