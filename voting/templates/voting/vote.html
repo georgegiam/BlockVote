@@ -47,6 +47,7 @@ BlockVote
 
     <!-- voting form -->
     <form action="#" method="POST">
+        {% csrf_token %}
         <div class="form-group">
             <input type="text" class="form-control" id="voter_id" placeholder="User ID">
         </div><br>
