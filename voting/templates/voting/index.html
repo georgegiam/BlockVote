@@ -12,6 +12,7 @@ BlockVote
         Use your personal "usr id" and start voting anonimously and securly.</p>
 
         <form class="form-inline" action="#" method="POST">
+            {% csrf_token %}
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="voter_id" placeholder="User ID">
                 <div class="input-group-append">
