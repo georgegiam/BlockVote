@@ -5,11 +5,42 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.shortcuts import render
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import models
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
 
 voter_id_set = set()
 c = bvs.MinimalChain()
 
 # Views
+#login
+def home(request):
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username)
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            loguser=request.user
+            request.session['username'] = str(username)
+            print(request.session['username'])
+            return render(request, 'voting/index.html')
+        else:
+            return render(request,"voting/login.html", { 'message': 'true'})
+    else:
+        return render(request,"voting/login.html")
+
+def mylogout(request):
+    print(request.session['username'])
+    logout(request)
+    request.session['username']=None
+    print(request.session['username'])
+    return redirect('../login/')
 
 # index
 def index(request):
@@ -91,25 +122,29 @@ def check_vote(request):
 
 
 
-def count_votes():
-    count_candidate = {
-        '1': 0,
-        '2': 0,
-        '3': 0,
-        '4': 0,
-        '5': 0,
-        '6': 0,
-        '7': 0,
-        '8': 0,
-        '9': 0,
-    }
-    for block in c.blocks[1:]:
-        data = block.data.split(',')
-        candidate_id = data[1].strip()
-        count_candidate[candidate_id] += 1
+def count_votes(request):
+    if request.session['username'] is not None:
+        count_candidate = {
+            '1': 0,
+            '2': 0,
+            '3': 0,
+            '4': 0,
+            '5': 0,
+            '6': 0,
+            '7': 0,
+            '8': 0,
+            '9': 0,
+        }
+        for block in c.blocks[1:]:
+            data = block.data.split(',')
+            candidate_id = data[1].strip()
+            count_candidate[candidate_id] += 1
 
-    winner_id = max(count_candidate, key=count_candidate.get)
-    return JsonResponse({'Winner': winner_id})
+        winner_id = max(count_candidate, key=count_candidate.get)
+        return render(request, "voting/winnerdisp.html", {'winner': winner_id})
+    else:
+        return redirect('../login/')
+
 
 
 def print_block(block):
@@ -119,7 +154,11 @@ def print_block(block):
     print('\n------------\n')
 
 
-def display_chain():
-    for block in c.blocks[1:]:
-        print_block(block)
+def display_chain(request):
+    if request.session['username'] is not None:
+        """for block in c.blocks[1:]:
+            print_block(block)"""
+        return render(request,"voting/showchain.html", {'chain' : c.blocks[1:]})
+    else:
+        return redirect('../login/')
 
