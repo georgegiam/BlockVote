@@ -15,7 +15,6 @@ from django.contrib.auth.models import User
 voter_id_set = set()
 c = bvs.MinimalChain()
 
-# Views
 #login
 def home(request):
 
@@ -45,6 +44,9 @@ def mylogout(request):
 # index
 def index(request):
     return render(request, 'voting/index.html')
+
+def tutorial(request):
+    return render(request, 'voting/tutorial.html')
 
 # voting
 def votingNow(request):
