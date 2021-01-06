@@ -86,7 +86,7 @@ def cast_vote(request):
     else:
         args = {}
         args['message'] = "You have probably provided wrong data. Please check voting documentation and try again."
-        print("voting unsuccessful.")
+        #print("voting unsuccessful.")
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
         return render(request, 'voting/error.html', args)
 
@@ -117,12 +117,16 @@ def check_vote(request):
                     # return JsonResponse({'candidate_id': block_candidate})
                     return render(request, 'voting/my_vote.html', args)
 
+        args = {}
+        args['message'] = "This user id does not exist. Check your id and try again."
         # return JsonResponse({'error': 'vote not found!'}, status=404)
-        return render(request, 'voting/error_user.html')
+        return render(request, 'voting/error.html', args)
     else:
-        print("check unsuccessful.")
+        args = {}
+        args['message'] = "You have probably provided wrong data. Please check voting documentation and try again."
+        #print("check unsuccessful.")
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
-        return render(request, 'voting/error_input.html')
+        return render(request, 'voting/error.html', args)
 
 
 
