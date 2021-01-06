@@ -78,13 +78,17 @@ def cast_vote(request):
 
             return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
         else:
-            print("voting unsuccessful.")
+            args = {}
+            args['message'] = "You have probably already voted. That means that you cannot vote again."
+            # print("voting unsuccessful.")
             # return JsonResponse({'error': 'already voted once!'}, status=422)
-            return render(request, 'voting/error_twice.html')
+            return render(request, 'voting/error.html', args)
     else:
+        args = {}
+        args['message'] = "You have probably provided wrong data. Please check voting documentation and try again."
         print("voting unsuccessful.")
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
-        return render(request, 'voting/error_input.html')
+        return render(request, 'voting/error.html', args)
 
 @method_decorator(csrf_exempt, name='dispatch')
 def check_vote(request):
