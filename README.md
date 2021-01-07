@@ -1,5 +1,10 @@
 # BlockVote
 
+### ToDo
+
+- [ ] When user is loged in the login buttin becomes logout
+- [ ] When user is not logged in only the "login" button should be displayed
+
 ### About
 
 BlockVote is a blockchain based e-voting system. The main purpose of this system is to ensure the integrity of the voting process by using blockchain technology.
