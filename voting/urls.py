@@ -10,8 +10,8 @@ urlpatterns = [
     path('cast_vote', views.votingNow, name="vote"),
     path('check_vote', views.checkingNow, name="check"),
 
-    path('countvotes/', views.count_votes, name="countvote"),
-    path('dispchain/', views.display_chain, name="displaychain"),
+    path('winner/', views.count_votes, name="countvote"),
+    path('showchain/', views.display_chain, name="displaychain"),
     
     path('cast_vote/api/vote', views.cast_vote, name="cast_vote"),
     path('check_vote/api/check', views.check_vote, name="check_vote"),

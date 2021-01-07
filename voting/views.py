@@ -1,19 +1,15 @@
 import re
 import voting.blockchain_voting_system as bvs
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
-from django.contrib.auth import models
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 
 voter_id_set = set()
 c = bvs.MinimalChain()
+# get the set of super_users: (<User: sk>, <User: Matty>)
+super_users = User.objects.filter(is_superuser=True)
 
 # Views
 #login
@@ -75,8 +71,6 @@ def cast_vote(request):
             c.add_block('{},{}'.format(voter_id,candidate_id))
             # print("voting successful.")
             return render(request, 'voting/success.html')
-
-            return JsonResponse({'user_voter_id': voter_id, 'candidate_id': candidate_id, 'voting_status':'successful'})
         else:
             print("voting unsuccessful.")
             # return JsonResponse({'error': 'already voted once!'}, status=422)
@@ -121,9 +115,9 @@ def check_vote(request):
         return render(request, 'voting/error_input.html')
 
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 def count_votes(request):
-    if request.session['username'] is not None:
+    # if request.session['username'] is not None:
         count_candidate = {
             '1': 0,
             '2': 0,
@@ -135,30 +129,45 @@ def count_votes(request):
             '8': 0,
             '9': 0,
         }
-        for block in c.blocks[1:]:
-            data = block.data.split(',')
-            candidate_id = data[1].strip()
-            count_candidate[candidate_id] += 1
+        if c.get_chain_size() > 0:
+            for block in c.blocks[1:]:
+                data = block.data.split(',')
+                candidate_id = data[1].strip()
+                count_candidate[candidate_id] += 1
 
-        winner_id = max(count_candidate, key=count_candidate.get)
-        return render(request, "voting/winnerdisp.html", {'winner': winner_id})
-    else:
-        return redirect('../login/')
-
-
-
-def print_block(block):
-    print('Block    #', block.index)
-    print('          ', block.data)
-    print('Timestamp ', block.timestamp)
-    print('\n------------\n')
+            winner_id = max(count_candidate, key=count_candidate.get)
+            context = {
+                "Winner": winner_id,
+            }
+            return render(request, "voting/show_winner.html", context)
+        else:
+            context = {
+                "Error": "The chain is empty.",
+            }
+            return render(request, "voting/show_winner.html", context)
+    # else:
+    #     return render(request, "voting/error_user.html")
 
 
 def display_chain(request):
-    if request.session['username'] is not None:
-        """for block in c.blocks[1:]:
-            print_block(block)"""
-        return render(request,"voting/showchain.html", {'chain' : c.blocks[1:]})
-    else:
-        return redirect('../login/')
+    """
+    :param request:
+    :return: A list of MiniBlock().
+            Error if the blockchain is empty.
+    """
+    if c.get_chain_size() > 0:
+        data = []
+        timestamps = []
+        for block in c.blocks[1:]:
+            data.append(block.data)
+            timestamps.append(block.timestamp.strftime("%Y-%m-%d  %H:%M:%S"))
 
+        context = {}
+        context['data'] = data
+        context['timestamps'] = timestamps
+        return render(request, "voting/show_chain.html", context)
+    else:
+        context = {
+            "Error": "The chain is empty."
+        }
+        return render(request, "voting/show_chain.html", context)
