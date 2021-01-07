@@ -13,7 +13,6 @@ super_users = User.objects.filter(is_superuser=True)
 
 #login
 def home(request):
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
