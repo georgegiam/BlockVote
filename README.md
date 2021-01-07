@@ -4,7 +4,7 @@
 
 - [ ] When user is loged in the login buttin becomes logout
 - [ ] When user is not logged in only the "login" button should be displayed
-- [ ] "Count votes" and "dhow chain" should be available only if the user is logged in
+- [ ] "Count votes" and "displa chain" should be available only if the user is logged in
 
 ### About
 
