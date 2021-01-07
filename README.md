@@ -3,8 +3,8 @@
 ### ToDo
 
 - [ ] When user is loged in the login buttin becomes logout
-- [ ] When user is not logged in only the "login" button should be displayed
-- [ ] "Count votes" and "displa chain" should be available only if the user is logged in
+- [x] When user is not logged in only the "login" button should be displayed
+- [x] "Count votes" and "displa chain" should be available only if the user is logged in
 
 ### About
 
