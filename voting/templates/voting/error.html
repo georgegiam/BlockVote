@@ -11,9 +11,9 @@ BlockVote
         <h4 class="alert-heading">Opps!</h4>
         <p>Something went wrong!</p>
         <hr>
-        <p class="mb-0">This user id does not exist. Check your id and try again.</p>
+        <p class="mb-0">{{ message }}</p>
       </div>
       
-    <a class="btn btn-primary" href="{% url 'check' %}" role="button">Check Vote</a>
+    <a class="btn btn-primary" href="{% url 'index' %}" role="button">Return Home</a>
 </div>
 {% endblock %}

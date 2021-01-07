@@ -11,7 +11,6 @@ c = bvs.MinimalChain()
 # get the set of super_users: (<User: sk>, <User: Matty>)
 super_users = User.objects.filter(is_superuser=True)
 
-# Views
 #login
 def home(request):
 
@@ -41,6 +40,9 @@ def mylogout(request):
 # index
 def index(request):
     return render(request, 'voting/index.html')
+
+def tutorial(request):
+    return render(request, 'voting/tutorial.html')
 
 # voting
 def votingNow(request):
@@ -72,13 +74,17 @@ def cast_vote(request):
             # print("voting successful.")
             return render(request, 'voting/success.html')
         else:
-            print("voting unsuccessful.")
+            args = {}
+            args['message'] = "You have probably already voted. That means that you cannot vote again."
+            # print("voting unsuccessful.")
             # return JsonResponse({'error': 'already voted once!'}, status=422)
-            return render(request, 'voting/error_twice.html')
+            return render(request, 'voting/error.html', args)
     else:
-        print("voting unsuccessful.")
+        args = {}
+        args['message'] = "You have probably provided wrong data. Please check voting documentation and try again."
+        #print("voting unsuccessful.")
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
-        return render(request, 'voting/error_input.html')
+        return render(request, 'voting/error.html', args)
 
 @method_decorator(csrf_exempt, name='dispatch')
 def check_vote(request):
@@ -107,12 +113,16 @@ def check_vote(request):
                     # return JsonResponse({'candidate_id': block_candidate})
                     return render(request, 'voting/my_vote.html', args)
 
+        args = {}
+        args['message'] = "This user id does not exist. Check your id and try again."
         # return JsonResponse({'error': 'vote not found!'}, status=404)
-        return render(request, 'voting/error_user.html')
+        return render(request, 'voting/error.html', args)
     else:
-        print("check unsuccessful.")
+        args = {}
+        args['message'] = "You have probably provided wrong data. Please check voting documentation and try again."
+        #print("check unsuccessful.")
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
-        return render(request, 'voting/error_input.html')
+        return render(request, 'voting/error.html', args)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
