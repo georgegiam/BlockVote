@@ -23,7 +23,7 @@ def home(request):
             loguser=request.user
             request.session['username'] = str(username)
             print(request.session['username'])
-            return render(request, 'voting/index.html')
+            return redirect(request, '../admin/')
         else:
             return render(request,"voting/login.html", { 'message': 'true'})
     else:
