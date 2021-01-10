@@ -148,6 +148,13 @@ def count_votes(request):
                 count_candidate[candidate_id] += 1
 
             winner_id = max(count_candidate, key=count_candidate.get)
+            # Check if two or more candidates have the same votes of the winner
+            for key in count_candidate.keys():
+                if count_candidate[key] == count_candidate[winner_id] and key != winner_id:
+                    context = {
+                        "Error": "There is no winner now."
+                    }
+                    return render(request, "voting/show_winner.html", context)
             context = {
                 "Winner": winner_id,
             }
