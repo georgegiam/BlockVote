@@ -129,7 +129,6 @@ def check_vote(request):
 # count votes
 @method_decorator(csrf_exempt, name='dispatch')
 def count_votes(request):
-    # if request.session['username'] is not None:
         count_candidate = {
             '1': 0,
             '2': 0,
@@ -164,8 +163,6 @@ def count_votes(request):
                 "Error": "The chain is empty.",
             }
             return render(request, "voting/show_winner.html", context)
-    # else:
-    #     return render(request, "voting/error_user.html")
 
 
 # display the whole blockchain
