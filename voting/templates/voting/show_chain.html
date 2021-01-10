@@ -7,12 +7,41 @@ BlockVote
 
 {% block body %}
 <div class="container text-center" id="main">
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Hooray!</h4>
-        <p class="mb-0">{{ Error }}</p>
-<!--        <p class="mb-0">{{ data }}</p>-->
-<!--        <p class="mb-0">{{ timestamps }}</p><br>-->
+    <h1>Blockhain</h1><br>
 
-    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr>                    
+                    <th scope="col">Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                        <tr>                    
+                            <td>{{ i }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr>                    
+                    <th scope="col">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for j in timestamp %}
+                        <tr>                    
+                            <td>{{ j }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+      </div>
 </div>
 {% endblock %}

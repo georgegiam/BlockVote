@@ -40,6 +40,7 @@ def mylogout(request):
 def index(request):
     return render(request, 'voting/index.html')
 
+# tutorial
 def tutorial(request):
     return render(request, 'voting/tutorial.html')
 
@@ -85,6 +86,7 @@ def cast_vote(request):
         # return JsonResponse({'error': 'malformed params, check voting documentation!'}, status=422)
         return render(request, 'voting/error.html', args)
 
+# check vote
 @method_decorator(csrf_exempt, name='dispatch')
 def check_vote(request):
     
@@ -124,6 +126,7 @@ def check_vote(request):
         return render(request, 'voting/error.html', args)
 
 
+# count votes
 @method_decorator(csrf_exempt, name='dispatch')
 def count_votes(request):
     # if request.session['username'] is not None:
@@ -158,6 +161,7 @@ def count_votes(request):
     #     return render(request, "voting/error_user.html")
 
 
+# display the whole blockchain
 def display_chain(request):
     """
     :param request:
@@ -167,16 +171,20 @@ def display_chain(request):
     if c.get_chain_size() > 0:
         data = []
         timestamps = []
+
         for block in c.blocks[1:]:
             data.append(block.data)
             timestamps.append(block.timestamp.strftime("%Y-%m-%d  %H:%M:%S"))
 
-        context = {}
-        context['data'] = data
-        context['timestamps'] = timestamps
+        context = {
+            "data" : data,
+            "timestamp" : timestamps
+        }
+     
         return render(request, "voting/show_chain.html", context)
     else:
-        context = {
-            "Error": "The chain is empty."
-        }
-        return render(request, "voting/show_chain.html", context)
+        context = {}
+
+        context['message'] = "The chain is empty."
+
+        return render(request, "voting/error.html", context)
