@@ -52,7 +52,7 @@ BlockVote
             <tbody>
                {% for k in hashes %}
                <tr class="table-info">
-                  <td>{{ k.substring(0, 5) }}</td>
+                  <td>{{ k[0, 5] }}</td>
                </tr>
                {% endfor %}
             </tbody>
@@ -69,7 +69,7 @@ BlockVote
          <tbody>
             {% for l in previous_hashes %}
             <tr class="table-info">
-               <td>{{ l.substring(0, 5) }}</td>
+               <td>{{ l[0, 5] }}</td>
             </tr>
             {% endfor %}
          </tbody>
