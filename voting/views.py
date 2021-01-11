@@ -178,14 +178,20 @@ def display_chain(request):
     if c.get_chain_size() > 0:
         data = []
         timestamps = []
+        previous_hashes = []
+        hashes = []
 
         for block in c.blocks[1:]:
             data.append(block.data)
             timestamps.append(block.timestamp.strftime("%Y-%m-%d  %H:%M:%S"))
+            previous_hashes.append(block.previous_hash)
+            hashes.append(block.hash)
 
         context = {
-            "data" : data,
-            "timestamp" : timestamps
+            "data": data,
+            "timestamp": timestamps,
+            "previous_hashes": previous_hashes,
+            "hashes": hashes,
         }
      
         return render(request, "voting/show_chain.html", context)
