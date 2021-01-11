@@ -65,8 +65,8 @@ def cast_vote(request):
     pattern_voter_id = '\d{1,9}'
     pattern_candidate_id = '[1-9]'
 
-    result_voter = re.match(pattern_voter_id, voter_id)
-    result_candidate = re.match(pattern_candidate_id, candidate_id)
+    result_voter = re.fullmatch(pattern_voter_id, voter_id)
+    result_candidate = re.fullmatch(pattern_candidate_id, candidate_id)
     print(result_voter, result_candidate)
 
     if result_voter and result_candidate:
@@ -97,7 +97,7 @@ def check_vote(request):
     voter_id = request.POST.get('voter_id', '')
     pattern_voter_id = '\d{1,9}'
     
-    result_voter = re.match(pattern_voter_id, voter_id)
+    result_voter = re.fullmatch(pattern_voter_id, voter_id)
 
     if result_voter:
         
