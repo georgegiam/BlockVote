@@ -17,7 +17,7 @@ BlockVote
         </li>
         <li class="nav-item">
             <a class="nav-link" id="tab2" data-toggle="pill" href="#t2" role="tab" aria-controls="pills-profile"
-                aria-selected="false">NAME</a>
+                aria-selected="false">Kuangyi Wang</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="tab3" data-toggle="pill" href="#t3" role="tab" aria-controls="pills-contact"
@@ -83,7 +83,34 @@ being able to find candidates or voters in the blockchain. <br><br>
 
         <!-- CONTENT 2 -->
         <div class="tab-pane fade" id="t2" role="tabpanel" aria-labelledby="tab2">
-            YOUR_CONTENT
+            What is the hash in a blockchain?<br><br>
+
+            Hashing is the process of taking the input string of any length and turning it into cryptographic fixed output.
+            Hashing is not an "encryption" and we cannot retrieve the original data by decrypting the hash. It is a one-way
+            cryptographic function.<br>
+            For example, assume we get a string "123". Through the hashing process, "123" can be turned to
+            "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3". This combination of numbers and letters seems horrible and
+            has nothing to do with the original "123".
+            But don't worry. You have no need to understand what this hash means. You only need to remember two things:<br>
+            1. The hash is unique, which means by the same hashing way, "123" will always be transformed to the output above;<br>
+            2. There is no way to reverse the hash above to the original "123".<br><br>
+
+            What is also interesting is that we can keep the whole data which is present on the Internet in the fixed string
+            length with the help of Hashing algorithm (SHA-256). No matter what the original data is, the SHA-256 algorithm will
+            turn the data into a combination of 64 numbers and letters in total.<br><br>
+
+            Admin Functions<br><br>
+
+            I implemented the two admin functions which are count_vote() method and display_chain() method.<br>
+            These two admin functions are not visible to normal voters. They can only be seen in the admin page which only administrators
+            have access to. In this way, we can ensure that no voter can see the winner of the voting during voting process
+            until we announce it after the voting is over.<br>
+            This ensures the fairness and security of voting.<br><br>
+            count_vote() will calculate currently which candidate has the most votes. In case, there could be two or more candidates who
+            have the same votes at the end of voting, the system will show that there is now winner and more votes are needed. Also, if there is no vote at all,
+            an error message will show up.<br>
+            display_chain() will show the whole blockchain which contains the votes information, such as user_id, candidate_id, timestamp and the unique hash of that vote.<br>
+            Because all the vote data is stored in a blockchain, we don't even need a database to help manage our data.
         </div>
 
         <!-- CONTENT 3 -->
