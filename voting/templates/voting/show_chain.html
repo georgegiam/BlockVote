@@ -1,51 +1,81 @@
 {% extends "voting/main.html" %}
 {% load static %}
-
 {% block title %}
 BlockVote
 {% endblock %}
-
 {% block body %}
 <div class="container text-center" id="main">
-  <h1>Blockhain</h1><br>
-
-  <div class="alert alert-info" role="alert">
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-            <tr class="table-info">
-              <th scope="col">Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for i in data %}
-            <tr class="table-info">
-              <td>{{ i }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+   <h1>Blockhain</h1>
+   <br>
+   <div class="alert alert-info" role="alert">
+      <div class="row">
+         <div class="col">
+            <table class="table">
+               <thead>
+                  <tr class="table-info">
+                     <th scope="col">Data</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for i in data %}
+                  <tr class="table-info">
+                     <td>{{ i }}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+         <div class="col">
+            <table class="table">
+               <thead>
+                  <tr class="table-info">
+                     <th scope="col">Timestamp</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for j in timestamp %}
+                  <tr class="table-info">
+                     <td>{{ j }}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
       </div>
       <div class="col">
-        <table class="table">
-          <thead>
+         <table class="table">
+            <thead>
+               <tr class="table-info">
+                  <th scope="col">block hash</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for k in hashes %}
+               <tr class="table-info">
+                  <td>{{ k }}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="col">
+      <table class="table">
+         <thead>
             <tr class="table-info">
-              <th scope="col">Timestamp</th>
+               <th scope="col">previous block hash</th>
             </tr>
-          </thead>
-          <tbody>
-            {% for j in timestamp %}
-            <tr class="table-info"> 
-              <td>{{ j }}</td>
+         </thead>
+         <tbody>
+            {% for l in previous_hashes %}
+            <tr class="table-info">
+               <td>{{ l }}</td>
             </tr>
             {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-
+         </tbody>
+      </table>
+   </div>
+</div>
+</div>
 </div>
 {% endblock %}
