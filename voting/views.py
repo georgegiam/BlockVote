@@ -66,7 +66,7 @@ def cast_vote(request):
     pattern_candidate_id = '[1-9]'
 
     result_voter = re.match(pattern_voter_id, voter_id)
-    result_candidate = re.match(pattern_candidate_id, candidate_id)
+    result_candidate = re.fullmatch(pattern_candidate_id, candidate_id)
 
     if result_voter and result_candidate:
         if voter_id not in voter_id_set:
