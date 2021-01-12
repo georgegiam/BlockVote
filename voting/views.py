@@ -44,9 +44,6 @@ def index(request):
 def tutorial(request):
     return render(request, 'voting/tutorial.html')
 
-def presentation(request):
-    return render(request, 'voting/presentation.html')
-
 # voting
 def votingNow(request):
     return render(request, 'voting/vote.html')

@@ -9,7 +9,6 @@ urlpatterns = [
     path('logout/', views.mylogout, name="logout"),
     path('cast_vote', views.votingNow, name="vote"),
     path('check_vote', views.checkingNow, name="check"),
-    path('presentation', views.presentation, name='presentation'),
 
     path('winner/', views.count_votes, name="countvote"),
     path('showchain/', views.display_chain, name="displaychain"),
